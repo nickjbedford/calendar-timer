@@ -15,7 +15,7 @@
 		private function runTimerTest(
 			array $expectedDatesForOffsets,
 			CalendarTimer $schedule,
-			string $today)
+			string $today): void
 		{
 			foreach($expectedDatesForOffsets as $expected=>$offset)
 			{

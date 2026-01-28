@@ -33,13 +33,14 @@
 			$months = $difference->y * 12 + $difference->m;
 			[$intervals, $remainder] = self::modulus($months, $this->interval);
 			
-			if ($difference->invert === 0)
+			if ($difference->invert === 0) // $difference is in the future
 			{
 				if ($remainder === 0 && $difference->d > 0)
 					$intervals++;
 				return $intervals + ($remainder > 0 ? 1 : 0);
 			}
 			
+			// $difference is in the past
 			return -$intervals;
 		}
 	}

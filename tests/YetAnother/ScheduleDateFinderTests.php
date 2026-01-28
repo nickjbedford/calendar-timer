@@ -183,7 +183,7 @@
 		 */
 		function testSpecificCalendarDaysInAugustFindsNextPreferredDate()
 		{
-			$schedule = (new ScheduleDesigner())
+			$schedule = new ScheduleDesigner()
 				->preferCalendarDaysInSpecificMonths(days: [ 5, 15, 25 ])
 				->availableMondayToFriday()
 				->create();
@@ -373,7 +373,7 @@
 		 */
 		function testPreferredWorkdaysFallsBackToAvailableWorkdaysDueToPublicHoliday()
 		{
-			$schedule = (new ScheduleDesigner())
+			$schedule = new ScheduleDesigner()
 				->availableMondayToFriday()
 				->preferFridays()
 				->useAlgorithm(ScheduleAlgorithm::NextPreferredThenClosestStandardWorkday)
@@ -408,7 +408,7 @@
 		 */
 		function testOnlyPreferredCalendarIsUsedToFindDatesWithAlgorithm()
 		{
-			$schedule = (new ScheduleDesigner())
+			$schedule = new ScheduleDesigner()
 				->preferDaysInFebruary([ 15 ])
 				->preferDaysInApril([ 5 ])
 				->availableAllWeek()
@@ -431,7 +431,7 @@
 		 */
 		function testFindClosestPreferredWorkdayBeforeUsingAlgorithm()
 		{
-			$schedule = (new ScheduleDesigner())
+			$schedule = new ScheduleDesigner()
 				->preferCalendarDaysInSpecificMonths([ 15 ])
 				->preferSpecificWeekdays(Weekday::MondayWednesdayFriday)
 				->availableMondayToFriday()
@@ -468,7 +468,7 @@
 		 */
 		function testFindClosestAvailableDate()
 		{
-			$designer = (new ScheduleDesigner())
+			$designer = new ScheduleDesigner()
 				->preferCalendarDaysInSpecificMonths([15])
 				->preferSpecificWeekdays(Weekday::MondayWednesdayFriday)
 				->availableMondayToFriday()
@@ -492,14 +492,14 @@
 			$this->assertEquals('2024-09-13', $schedule->closest('2024-09-14', '2024-08-16')->toDateString());
 			$this->assertEquals('2024-09-16', $schedule->closest('2024-09-14', '2024-09-14')->toDateString());
 			
-			$schedule = (new ScheduleDesigner())
+			$schedule = new ScheduleDesigner()
 				->availableMondayToFriday()
 				->preferSpecificWeekdays([ Weekday::Tuesday, Weekday::Friday ])
 				->create();
 			
 			$this->assertEquals('2024-07-09', $schedule->closest('2024-07-11', '2024-07-01')->toDateString());
 			
-			$schedule = (new ScheduleDesigner())
+			$schedule = new ScheduleDesigner()
 				->availableMondayToFriday()
 				->preferSpecificWeekdays([ Weekday::Tuesday, Weekday::Friday ])
 				->excludeDate('2024-07-09')

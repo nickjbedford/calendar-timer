@@ -33,9 +33,10 @@
 			$days = $difference->days;
 			[$intervals, $remainder] = self::modulus($days, $this->interval);
 			
-			if ($difference->invert === 0)
+			if ($difference->invert === 0) // $difference is in the future
 				return $intervals + ($remainder > 0 ? 1 : 0);
 			
+			// $difference is in the past
 			return -$intervals;
 		}
 	}

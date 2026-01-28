@@ -1,4 +1,5 @@
 <?php
+	/** @noinspection PhpGetterAndSetterCanBeReplacedWithPropertyHooksInspection */
 	/** @noinspection PhpUnused */
 	
 	namespace YetAnother;
@@ -34,7 +35,7 @@
 		 */
 		protected function __construct(string $referenceDate, int $interval, string $intervalName)
 		{
-			$this->referenceDate = (new DateTime($referenceDate))->setTime(0, 0);
+			$this->referenceDate = new DateTime($referenceDate)->setTime(0, 0);
 			$this->interval = max(1, $interval);
 			$this->intervalName = $intervalName;
 		}
@@ -66,7 +67,7 @@
 		 */
 		public function getNextDate(int $intervalOffset = 0, ?string $from = null): string
 		{
-			$date = (new DateTime($from ?: date('Y-m-d')))->setTime(0, 0);
+			$date = new DateTime($from ?: date('Y-m-d'))->setTime(0, 0);
 			$difference = $this->referenceDate->diff($date);
 			$intervals = $this->calculateIntervalsUntilNext($difference);
 			
@@ -80,8 +81,8 @@
 		}
 		
 		/**
-		 * This should calculate the number of days, months or years to add or subtract from the reference date
-		 * based on a current date.
+		 * This should calculate the number of intervals (multiplied by days, months or years) to add or
+		 * subtract from the timer's reference date based on a DateInterval difference to a given date such as today.
 		 * @param DateInterval $difference The difference to the current date.
 		 * @return int
 		 */
